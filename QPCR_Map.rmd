@@ -1,0 +1,45 @@
+---
+title: "qPCR-detektion"
+output:
+  flexdashboard::flex_dashboard:
+    theme:
+        primary:
+          "#144836"
+    logo:
+      nrm-logo.svg
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+devtools::source_url("https://raw.githubusercontent.com/CGI-NRM/CGIMapSource/refs/heads/main/cgi_map_source.r") # load map functions
+mapData <- LoadCoordinatesQPCR("./map_data_qpcr.xlsx") # load qPCR map data
+```
+
+```{css include=FALSE}
+<!-- Max out table -->
+.dataTables_wrapper {
+    display: inline-block !important;
+    width: max-content !important;
+    max-width: 100% !important;
+    flex-shrink: 0 !important;
+}
+
+.htmlwidget, .leaflet {
+    flex-grow: 1 !important;
+    width: 100% !important;
+}
+```
+
+<!-- Column {data-width=600} -->
+--------------------------------------------------------------------------------
+### 
+```{r echo=FALSE}
+GenerateMapQPCR(mapData)
+```
+
+Column {data-width=100%}
+--------------------------------------------------------------------------------
+### 
+```{r echo=FALSE}
+GenerateTableQPCR(mapData)
+```
